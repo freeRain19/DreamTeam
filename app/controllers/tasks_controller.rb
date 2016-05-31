@@ -15,6 +15,8 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @users = User.all
+    @projects = Project.all
   end
 
   # GET /tasks/1/edit

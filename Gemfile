@@ -7,6 +7,8 @@ group :development do
 # Use mysql as the database for Active Record
 gem 'mysql2', '0.4.4'
 end
+gem 'devise', '4.0.1'
+gem 'cancancan', '1.14.0'
 #for Bootstrap dependency gems
 gem 'autoprefixer-rails','6.3.6'
 gem 'sass',' 3.4.22'

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :teams
+  devise_for :users
+
   root 'static_pages#home'
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
@@ -9,7 +12,10 @@ Rails.application.routes.draw do
   resources :teams
   resources :tasks
   resources :projects
-  resources :users
+  scope "/admin" do
+    resources :users
+  end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

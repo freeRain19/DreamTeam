@@ -5,6 +5,7 @@ one:
   password: MyString
   first_name: MyString
   last_name: MyString
+  team_id: 
   role: MyString
 
 two:
@@ -12,4 +13,5 @@ two:
   password: MyString
   first_name: MyString
   last_name: MyString
+  team_id: 
   role: MyString
