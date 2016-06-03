@@ -21,6 +21,11 @@ module RailsP
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.generators do |g|
+      g.template_engine :haml
+      g.test_framework :rspec, fixtures: true, views: false
+      g.test_fixture_replacement :factory_girl, dir: "spec/factories"
+    end
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.active_record.raise_in_transactional_callbacks = true
   end

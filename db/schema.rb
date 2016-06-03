@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531104039) do
+ActiveRecord::Schema.define(version: 20160602080623) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "message",    limit: 255
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20160531104039) do
     t.date   "end_date"
   end
 
+  add_index "projects", ["name"], name: "index_projects_on_name", unique: true, using: :btree
+
   create_table "projects_teams", id: false, force: :cascade do |t|
     t.integer "team_id",    limit: 4, null: false
     t.integer "project_id", limit: 4, null: false
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160531104039) do
   end
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
+  add_index "tasks", ["title"], name: "index_tasks_on_title", unique: true, using: :btree
   add_index "tasks", ["user_id"], name: "fk_rails_4d2a9e4d7e_idx", using: :btree
 
   create_table "teams", force: :cascade do |t|
@@ -70,6 +73,8 @@ ActiveRecord::Schema.define(version: 20160531104039) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "teams", ["name"], name: "index_teams_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",               limit: 255
