@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  has_many :posts
+  has_many :posts, :dependent => :destroy
   belongs_to :user
   belongs_to :project
   validates :title, presence: true, length: {maximum: 80}, uniqueness: {case_sensitive: false}

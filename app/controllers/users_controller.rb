@@ -1,45 +1,47 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:new, :create]
   load_and_authorize_resource
   # before_filter :authenticate_user!, except => [:show, :index]
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:team_id].present?
+      @team = Team.find(params[:team_id])
+      @users=@team.users
+    else
+      @user=User.all
+    end
+
+    #@users = User.all
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-=begin
-if @user.role? :user
-  @user = User.find(params[:id])
-  unless @user == current_user
-    redirect_to :back, :alert => "Access denied."
-  end
-end
-else
- @user = User.find(params[:id])
-=end
+    # @team = Team.find(params[:team_id])
+    #@user.team = @team
+
   end
 
   # GET /users/new
   def new
-    @user = User.new
+    @user = User.new()
   end
 
   # GET /users/1/edit
   def edit
-
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    @user.team_id = @team.id
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to team_url(@user.team_id), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -53,7 +55,7 @@ else
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to team_url(@user.team_id), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -67,7 +69,7 @@ else
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to team_url(@user.team_id), notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,6 +78,10 @@ else
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_team
+    @team = Team.find(params[:team_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

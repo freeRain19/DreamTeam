@@ -1,10 +1,21 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:create, :new]
 
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    if params[:user_id].present?
+      @user = User.find(params[:user_id])
+      @comments=@user.comments
+    else
+      @comments = Comment.all
+    end
+    @ids=Array.new
+    @comments.each do |comment|
+      @ids<<comment.post_id
+    end
+    @posts=Post.find(@ids)
   end
 
   # GET /comments/1
@@ -24,8 +35,8 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
-
+    @comment = Comment.new(comment_params.merge(:user_id => current_user.id))
+    @comment.post_id=@post.id
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
@@ -62,13 +73,18 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:message)
-    end
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:message, :user_id, :post_id)
+  end
 end

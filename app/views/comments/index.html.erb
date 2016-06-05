@@ -2,26 +2,29 @@
 
 <h1>Listing Comments</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
-    <tr>
-      <th>Message</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Message</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @comments.each do |comment| %>
+  <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.message %></td>
+        <% @posts.each do |post| %>
+            <% if post.id==comment.post_id %>
+                <td><%= post.content %></td>
+            <% end %>
+        <% end %>
         <td><%= link_to 'Show', comment %></td>
         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', comment, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New Comment', new_comment_path %>

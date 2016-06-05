@@ -2,7 +2,12 @@ FactoryGirl.define do
 
 
   sequence :email do |n|
-    "person#{n}@example.com"
+    "person#{n}@examples.com"
+  end
+  sequence :role_id do |q|
+    if q==1
+      return 1
+    end
   end
 
 
@@ -11,7 +16,7 @@ FactoryGirl.define do
     password 'password'
     first_name 'first_name'
     last_name 'last_name'
-    #association(:team)
+
   end
 
   factory :user_with_tasks, :parent => :user do

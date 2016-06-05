@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :comment do
     sequence :message do |n|
-      "message #{n}  Ololo"
+      "This is a big big comment #{n} to post  Olololo"
     end
   end
 end

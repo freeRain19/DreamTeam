@@ -2,7 +2,7 @@
 
 <h1>Listing Users</h1>
 
-<table class = "features-table">
+<table class ="table table-hover"><!--"features-table"-->
   <thead>
     <tr>
       <td>Email</td>
@@ -17,21 +17,22 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.email %></td>
+        <td><%=link_to user.email,user%></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.team %></td>
-        <td><%= user.role.name %></td>
+        <td><%= user.team.name %></td>
+        <td><%= user.role_id %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy',  user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+
     <% end %>
   </tbody>
 </table>
 
 <br>
 <% if can? :create, User %>
-    <%= link_to 'New User', new_user_path %>
+    <%= link_to 'New User', new_team_user_path(:team_id) %>
 <% end %>
 

@@ -1,13 +1,14 @@
 FactoryGirl.define do
+
   factory :post do
-    content 'content'
+    sequence :content do |n|
+      "Long long, very long post number ##{n} "
+    end
 
-
-  end
-
-  factory :post_with_comments, :parent => :post do
-    after(:create) do |post|
-      FactoryGirl.create(:comment, :post => post)
+    factory :post_with_comments, :parent => :post do
+      after(:create) do |post|
+        FactoryGirl.create(:comment, :post => post)
+      end
     end
   end
 end

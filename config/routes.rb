@@ -7,14 +7,26 @@ Rails.application.routes.draw do
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/signup',  to: 'users#new',            via: 'get'
-  resources :comments
-  resources :posts
-  resources :teams
-  resources :tasks
-  resources :projects
-  scope "/admin" do
+
+
+  resources :teams, shallow: true  do
     resources :users
   end
+  resources :users, shallow: true  do
+    resources :comments
+  end
+
+  resources :projects, shallow: true  do
+    resources :tasks
+  end
+  resources :tasks, shallow: true  do
+    resources :posts
+  end
+
+  resources :posts, shallow: true  do
+    resources :comments
+  end
+
 
 
 

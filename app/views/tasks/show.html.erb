@@ -24,6 +24,10 @@
   <strong>Estimation:</strong>
   <%= @task.estimation %>
 </p>
+<p>
+  <strong>Tasks posts</strong>
+  <%= link_to pluralize(@task.posts.size, 'post'), task_posts_path(:task_id => @task) %>
+</p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Back', project_tasks_path(:project_id => @task.project.id) %>

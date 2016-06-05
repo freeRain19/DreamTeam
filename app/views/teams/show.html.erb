@@ -1,9 +1,17 @@
 <p id="notice"><%= notice %></p>
+<%= simple_format h(@team.name) %>
 
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
 </p>
+<p>
+  <strong>Teams users</strong>
+  <%= link_to pluralize(@team.users.size, 'user'), team_users_path(:team_id => @team) %>
+</p>
 
+<% if can? :create, User %>
+    <%= link_to 'Add New User', new_team_user_path(:team_id => @team) %>
+<% end %>
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

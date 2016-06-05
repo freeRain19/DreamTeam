@@ -1,6 +1,6 @@
 FactoryGirl.define do
   sequence :name do |n|
-    "Project #{n}"
+    "Project ##{n}"
   end
   factory :project do
     name

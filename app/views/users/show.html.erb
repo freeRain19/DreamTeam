@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<p>
   <strong>First name:</strong>
   <%= @user.first_name %>
 </p>
@@ -19,16 +14,16 @@
   <strong>Last name:</strong>
   <%= @user.last_name %>
 </p>
-
+<p>
+  <strong>Users comments</strong>
+  <%= link_to pluralize(@user.comments.size, 'comment'), user_comments_path(:user_id => @user) %>
+</p>
 <p>
   <strong>Team:</strong>
-  <%= @user.team %>
+  <%= @user.team.name %>
 </p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @user.role.name %>
-</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', team_users_path(:team_id => @user.team.id) %>

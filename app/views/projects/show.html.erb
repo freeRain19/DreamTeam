@@ -19,6 +19,10 @@
   <strong>End date:</strong>
   <%= @project.end_date %>
 </p>
-
+<p>
+  <strong>Tasks</strong>
+  <%= link_to pluralize(@project.tasks.size, 'task'), project_tasks_path(:project_id => @project) %>
+</p>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+<%=link_to 'New Task', new_project_task_path(:project_id => @project) %>
