@@ -16,6 +16,7 @@ FactoryGirl.define do
     password 'password'
     first_name 'first_name'
     last_name 'last_name'
+    role_id 2
 
   end
 

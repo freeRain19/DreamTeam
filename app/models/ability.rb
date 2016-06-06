@@ -3,14 +3,20 @@ class Ability
 
   def initialize(user)
     return if user.nil?
-
     user ||= User.new
     if user.has_role? :admin
       can :manage, :all
-    else
-    can :edit , User
+    elsif user.has_role? :user
+      can [:update, :read], User do |userC|
+        userC==user
+      end
+      cannot :index, :all
+      #can :read, Project, :active => true, :user_id => user.id
+      can :create, Comment
+      can :manage, Comment do |comment|
+        comment.user==user
+      end
     end
-
 
 
     # ...

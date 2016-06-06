@@ -2,7 +2,7 @@ FactoryGirl.define do
 
   factory :post do
     sequence :content do |n|
-      "Long long, very long post number ##{n} "
+      "Long long, very long post number #{n} "
     end
 
     factory :post_with_comments, :parent => :post do

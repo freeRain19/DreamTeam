@@ -6,10 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'factory_girl_rails'
+
 role_admin=Role.create(name: 'admin')
 role_user=Role.create(name: 'user')
 user_admin=User.create(email: 'admin@admin.com',password: 'qweqwe',role_id: 1,first_name: 'denis',last_name: 'T')
 user_admin.save
+
 5.times {
 
   #-------create team with 3 users

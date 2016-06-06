@@ -3,15 +3,20 @@ require 'spec_helper'
 
 describe User do
   it 'Count user tasks' do
+    role_admin=Role.create(name: 'admin')
+    role_user=Role.create(name: 'user')
     user1 = FactoryGirl.create(:user)
     user2=FactoryGirl.create(:user)
     users=Array.new
     users<<user1
     users<<user2
+
     users.count.should==2
+
   end
 
   it 'create & fill tables' do
+
     4.times {
 
       #-------create team with 3 users
@@ -23,7 +28,6 @@ describe User do
       #----------Assign a random team the project
       max_team=Team.all.size
       random_team=Team.find(rand(max_team)+1)
-      puts random_team.name
       random_team.projects<<project
 
       #-----Field "task" is filled in 2 from 3 users

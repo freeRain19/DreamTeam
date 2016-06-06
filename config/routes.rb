@@ -6,28 +6,27 @@ Rails.application.routes.draw do
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
-  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signup', to: 'users#new', via: 'get'
 
+  resources :reports
 
-  resources :teams, shallow: true  do
+  resources :teams, shallow: true do
     resources :users
   end
-  resources :users, shallow: true  do
+  resources :users, shallow: true do
     resources :comments
   end
 
-  resources :projects, shallow: true  do
+  resources :projects, shallow: true do
     resources :tasks
   end
-  resources :tasks, shallow: true  do
+  resources :tasks, shallow: true do
     resources :posts
   end
 
-  resources :posts, shallow: true  do
+  resources :posts, shallow: true do
     resources :comments
   end
-
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.

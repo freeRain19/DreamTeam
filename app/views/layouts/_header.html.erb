@@ -13,6 +13,7 @@
 </header>
 <div align="right">
 <% if user_signed_in? %>
+ <%= link_to 'Your Profile', current_user%>
     <span>Здравствуйте, <%= current_user.email %></span>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
 <% else %>

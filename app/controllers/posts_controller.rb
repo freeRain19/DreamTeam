@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [ :edit, :update, :destroy]
   before_action :set_task, only: [:new, :create]
+  load_and_authorize_resource
   # GET /posts
   # GET /posts.json
   def index

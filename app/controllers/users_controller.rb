@@ -2,32 +2,30 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_team, only: [:new, :create]
   load_and_authorize_resource
-  # before_filter :authenticate_user!, except => [:show, :index]
+
   # GET /users
   # GET /users.json
   def index
     if params[:team_id].present?
+      @teams=Array.new
       @team = Team.find(params[:team_id])
-      @users=@team.users
+      @teams<<@team
+      #@users=@team.users
     else
-      @user=User.all
+      @teams=Team.all
     end
-
-    #@users = User.all
-
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    # @team = Team.find(params[:team_id])
-    #@user.team = @team
+
 
   end
 
   # GET /users/new
   def new
-    @user = User.new()
+    @user = User.new
   end
 
   # GET /users/1/edit

@@ -1,10 +1,14 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  #before_action :set_project, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:search_name]
+      @projects=Project.where('name like ?', "%#{params[:search_name]}%")
+    else
+      @projects = Project.all
+    end
   end
 
   # GET /projects/1
@@ -12,9 +16,17 @@ class ProjectsController < ApplicationController
   def show
   end
 
+  def search
+    if params[:search]
+      puts "_________________________________________"
+    end
+    redirect_to projects_path, :notice => :search
+  end
+
   # GET /projects/new
   def new
     @project = Project.new
+    # authorize! :create, @project
   end
 
   # GET /projects/1/edit
@@ -62,13 +74,13 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :summary, :start_date, :end_date)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :summary, :start_date, :end_date)
+  end
 end

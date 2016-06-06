@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_project, only: [:new, :create ]
-
+  load_and_authorize_resource
   # GET /tasks
   # GET /tasks.json
   def index
@@ -22,8 +22,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-    #@users = User.all
-    #@projects = Project.all
+
   end
 
   # GET /tasks/1/edit

@@ -7,9 +7,20 @@
 </div>
 
 <ul class="nav nav-justified" type="">
-  <li><%= link_to "Project", projects_path %></li>
-  <li><%= link_to "Teams", teams_path %></li>
-  <li><%= link_to "Tasks", tasks_path %></li>
-  <li><%= link_to "Posts", posts_path %></li>
-  <li><%= link_to "Users", users_path %></li>
+  <% if can? :index, Project %>
+      <li><%= link_to "Reports", reports_path %></li>
+      <li><%= link_to "Project", projects_path %></li>
+  <% end %>
+  <% if can? :index, Team %>
+      <li><%= link_to "Teams", teams_path %></li>
+  <% end %>
+  <% if can? :index, Task %>
+      <li><%= link_to "Tasks", tasks_path %></li>
+  <% end %>
+  <% if can? :index, Post %>
+      <li><%= link_to "Posts", posts_path %></li>
+  <% end %>
+  <% if can? :index, User %>
+      <li><%= link_to "Users", users_path %></li>
+  <% end %>
 </ul>

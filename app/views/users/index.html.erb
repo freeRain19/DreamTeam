@@ -1,33 +1,37 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Users</h1>
 
-<table class ="table table-hover"><!--"features-table"-->
+<table class="table table-striped"><!--"features-table"-->
   <thead>
-    <tr>
-      <td>Email</td>
-      <td>First name</td>
-      <td>Last name</td>
-      <td>Team</td>
-      <td align="right">Role</td>
-      <td colspan="3"></td>
-    </tr>
+  <tr>
+    <td>Email</td>
+    <td>First name</td>
+    <td>Last name</td>
+    <td>Team</td>
+    <td align="right">Role</td>
+    <td colspan="3"></td>
+  </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+  <% @teams.each do |team| %>
       <tr>
-        <td><%=link_to user.email,user%></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.team.name %></td>
-        <td><%= user.role_id %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy',  user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= team.name %>
+        </td>
       </tr>
-
-    <% end %>
+      <% team.users.each do |user| %>
+          <tr>
+            <td><%= link_to user.email, user %></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.team.name %></td>
+            <td><%= user.role.name %></td>
+            <td><%= link_to 'Show', user %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+            <td><%= link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          </tr>
+      <% end %>
+  <% end %>
   </tbody>
 </table>
 

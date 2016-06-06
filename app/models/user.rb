@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   validates :email, presence: true, uniqueness: {case_sensitive: false}
-  validates :first_name, length: {minimum: 2, maximum: 20}, presence: true
-  validates :last_name, length: {minimum: 2, maximum: 20}, presence: true
-  #validates :team, inclusion: {in: Team.all}
+  validates :first_name, length: {minimum: 2, maximum: 20}
+  validates :last_name, length: {minimum: 2, maximum: 20}
+
 
   belongs_to :team
   belongs_to :role

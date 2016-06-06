@@ -1,21 +1,25 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :set_post, only: [:create, :new]
 
   # GET /comments
   # GET /comments.json
   def index
+    #authorize! :index, @comment
     if params[:user_id].present?
       @user = User.find(params[:user_id])
       @comments=@user.comments
-    else
+      @ids=Array.new
+      @comments.each do |comment|
+        @ids<<comment.post_id
+        @posts=Post.find(@ids)
+      end
+    elsif @user.present?
       @comments = Comment.all
+    else
+      redirect_to root_url, notice: "you cannot show this page"
     end
-    @ids=Array.new
-    @comments.each do |comment|
-      @ids<<comment.post_id
-    end
-    @posts=Post.find(@ids)
   end
 
   # GET /comments/1
@@ -67,7 +71,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to posts_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -80,6 +84,7 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+
   end
 
 
@@ -87,4 +92,5 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:message, :user_id, :post_id)
   end
+
 end
