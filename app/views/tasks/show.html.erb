@@ -1,33 +1,33 @@
-<p id="notice"><%= notice %></p>
+  <h5>
+    <strong>Title:</strong>
+    <%= @task.title %>
+  </h5>
 
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
+  <h5>
+    <strong>Status:</strong>
+    <%= @task.status %>
+  </h5>
+  <h5>
+    <strong>User:</strong>
+    <%= @task.user.email %>
+  </h5>
+  <h5>
+    <strong>Start date:</strong>
+    <%= @task.start_date %>
+  </h5>
 
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
+  <h5>
+    <strong>Due date:</strong>
+    <%= @task.due_date %>
+  </h5>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @task.start_date %>
-</p>
-
-<p>
-  <strong>Due date:</strong>
-  <%= @task.due_date %>
-</p>
-
-<p>
-  <strong>Estimation:</strong>
-  <%= @task.estimation %>
-</p>
-<p>
-  <strong>Tasks posts</strong>
-  <%= link_to pluralize(@task.posts.size, 'post'), task_posts_path(:task_id => @task) %>
-</p>
+  <h5>
+    <strong>Estimation:</strong>
+    <%= @task.estimation %>
+  </h5>
+  <h5>
+    <strong>Tasks posts</strong>
+    <%= link_to pluralize(@task.posts.size, 'post'), task_posts_path(:task_id => @task) %>
+  </h5>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', project_tasks_path(:project_id => @task.project.id) %>

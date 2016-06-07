@@ -10,8 +10,8 @@ class Ability
       can [:update, :read], User do |userC|
         userC==user
       end
+      can :read, :all
       cannot :index, :all
-      #can :read, Project, :active => true, :user_id => user.id
       can :create, Comment
       can :manage, Comment do |comment|
         comment.user==user

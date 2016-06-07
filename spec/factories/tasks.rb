@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
   sequence :status do |n|
     if (n%2)==0
-      "done"
+      "complete"
     else
       "in progress"
     end

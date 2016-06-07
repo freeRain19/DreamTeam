@@ -1,16 +1,26 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_project, only: [:new, :create ]
+  before_action :set_project, only: [:new, :create]
   load_and_authorize_resource
   # GET /tasks
   # GET /tasks.json
   def index
+
+    if params[:user_id].present?
+      @user=User.find(params[:user_id])
+      @tasks=@user.tasks
+      @tasks=complete(params[:commit], @tasks)
+      render
+    end
+
     if params[:project_id].present?
       @project = Project.find(params[:project_id])
       @tasks=@project.tasks
-
+      @tasks=self.complete(params[:commit], @tasks)
     else
       @tasks=Task.all
+      @tasks=complete(params[:commit], @tasks)
+
     end
   end
 
@@ -19,11 +29,19 @@ class TasksController < ApplicationController
   def show
   end
 
+  def complete(commit, tasks)
+    if commit
+        tasks.reject { |task| task.status!='complete' }
+    else
+      tasks
+    end
+  end
+
   # GET /tasks/new
   def new
     @task = Task.new
-
   end
+
 
   # GET /tasks/1/edit
   def edit
@@ -83,4 +101,5 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :status, :start_date, :due_date, :estimation, :project_id, :user_id)
   end
+
 end

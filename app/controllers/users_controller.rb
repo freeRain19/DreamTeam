@@ -7,12 +7,10 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if params[:team_id].present?
-      @teams=Array.new
       @team = Team.find(params[:team_id])
-      @teams<<@team
-      #@users=@team.users
+      @users=@team.users
     else
-      @teams=Team.all
+      @users=User.all
     end
   end
 
@@ -36,6 +34,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.role_id=2
     @user.team_id = @team.id
     respond_to do |format|
       if @user.save

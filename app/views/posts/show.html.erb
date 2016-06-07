@@ -1,11 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<p>
+<h5>
   <strong>Content:</strong>
   <%= @post.content %>
-</p>
+</h5>
 
-<p>
+
 <h2>Posts comments</h2>
 <table class ="table">
   <% @post.comments.each do |comment| %>
@@ -21,4 +19,3 @@
 </p>
 <%= link_to 'New Comment', new_post_comment_path(:post_id=>@post.id) %>
 <%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', task_posts_path(:task_id => @post.task.id) %>

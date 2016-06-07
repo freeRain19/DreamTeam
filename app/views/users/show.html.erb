@@ -1,27 +1,29 @@
-<p>
+<h4>
   <strong>Email:</strong>
   <%= @user.email %>
-</p>
+</h4>
 
-<p>
+<h4>
   <strong>First name:</strong>
   <%= @user.first_name %>
-</p>
+</h4>
 
-<p>
+<h4>
   <strong>Last name:</strong>
   <%= @user.last_name %>
-</p>
-<p>
+</h4>
+<h4>
   <strong>Users comments</strong>
   <%= link_to pluralize(@user.comments.size, 'comment'), user_comments_path(:user_id => @user) %>
-</p>
-<p>
+</h4>
+<h4>
+  <strong>Users tasks</strong>
+  <%= link_to pluralize(@user.tasks.size, 'task'), user_tasks_path(:user_id => @user) %>
+</h4>
+<h4>
   <strong>Team:</strong>
-  <%= @user.team.name %>
-</p>
-
-
+  <%= @user.team %>
+</h4>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', team_users_path(:team_id => @user.team.id) %>
+

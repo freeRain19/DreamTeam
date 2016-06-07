@@ -1,34 +1,51 @@
-<p id="notice"><%= notice %></p>
+<% if @project==nil&&@user==nil %>
+    <%= form_tag tasks_path,  :method => 'get' do %>
+        <p>
+          <%= submit_tag "Get completed Tasks for all" %>
+        </p>
+    <% end %>
+<% end %>
+<% if @project!=nil %>
+    <%= form_tag project_tasks_path(:project_id => @project),  :method => 'get' do %>
+        <p>
+          <%= submit_tag "Get completed Tasks for project" %>
+        </p>
+    <% end %>
+<% end %>
+<% if @user!=nil %>
+    <%= form_tag user_tasks_path(:user_id => @user),  :method => 'get' do %>
+        <p>
+          <%= submit_tag "Get completed Tasks for user" %>
+        </p>
+    <% end %>
+<% end %>
 
-<h1>Listing Tasks</h1>
-
-<table class ="table table-hover">
+<table class="table table-hover">
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Status</th>
-      <th>Start date</th>
-      <th>Due date</th>
-      <th>Estimation</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Start date</th>
+    <th>Due date</th>
+    <th>Estimation</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @tasks.each do |task| %>
+  <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.title %></td>
+        <td><%= link_to task.title, task %></td>
         <td><%= task.status %></td>
         <td><%= task.start_date %></td>
         <td><%= task.due_date %></td>
         <td><%= task.estimation %></td>
-        <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <% if can? :destroy, Task%>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :destroy, Task %>
+            <td><%= link_to 'Destroy', task, method: :delete, data: {confirm: 'Are you sure?'} %></td>
         <% end %>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 

@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   resources :teams
-  devise_for :users
+  devise_for :users, controllers: {:registrations => "registrations"}
 
   root 'static_pages#home'
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/signup', to: 'users#new', via: 'get'
-
   resources :reports
 
   resources :teams, shallow: true do
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
   end
   resources :users, shallow: true do
     resources :comments
+    resources :tasks
   end
 
   resources :projects, shallow: true do

@@ -1,28 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<p>
+<h5>
   <strong>Name:</strong>
   <%= @project.name %>
-</p>
+</h5>
 
-<p>
+<h5>
   <strong>Summary:</strong>
   <%= @project.summary %>
-</p>
+</h5>
 
-<p>
+<h5>
   <strong>Start date:</strong>
   <%= @project.start_date %>
-</p>
+</h5>
 
-<p>
+<h5>
   <strong>End date:</strong>
   <%= @project.end_date %>
-</p>
-<p>
+</h5>
+<h5>
   <strong>Tasks</strong>
   <%= link_to pluralize(@project.tasks.size, 'task'), project_tasks_path(:project_id => @project) %>
-</p>
+</h5>
 <%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
 <%=link_to 'New Task', new_project_task_path(:project_id => @project) %>
