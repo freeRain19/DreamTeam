@@ -2,6 +2,7 @@ require 'spec_helper'
 
 
 describe User do
+=begin
   it 'Count user tasks' do
     role_admin=Role.create(name: 'admin')
     role_user=Role.create(name: 'user')
@@ -10,18 +11,17 @@ describe User do
     users=Array.new
     users<<user1
     users<<user2
-
     users.count.should==2
 
   end
 
   it 'create & fill tables' do
-
+    role_admin=Role.create(name: 'admin')
+    role_user=Role.create(name: 'user')
     4.times {
-
       #-------create team with 3 users
       team = FactoryGirl.create(:team_with_users, users_count: 3)
-
+      team.save
       #-------create project  with 2 tasks
       project = FactoryGirl.create(:project_with_tasks, tasks_count: 2)
 
@@ -33,7 +33,7 @@ describe User do
       #-----Field "task" is filled in 2 from 3 users
       project.tasks.each_index do |index|
         random_team.users[index].tasks<<project.tasks[index]
-        post = FactoryGirl.create(:post, :task=> project.tasks[index])
+        post = FactoryGirl.create(:post, :task => project.tasks[index])
       end
 
       #-------- add posts & generate comments from random user
@@ -44,6 +44,7 @@ describe User do
         post.comments<<comment
       end
     }
-
   end
+=end
+
 end

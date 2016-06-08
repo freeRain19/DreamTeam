@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    #authorize! :index, @comment
     if params[:user_id].present?
       @user = User.find(params[:user_id])
       @comments=@user.comments

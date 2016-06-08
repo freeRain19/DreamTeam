@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [ :edit, :update, :destroy]
+  before_action :set_post, only: [:edit, :update, :destroy]
   before_action :set_task, only: [:new, :create]
   load_and_authorize_resource
   # GET /posts
@@ -33,7 +33,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.task_id=@task.id
+    unless @post.task_id
+      @post.task_id=@task.id
+    end
     respond_to do |format|
       if @post.save
         format.html { redirect_to task_url(@post.task_id), notice: 'Post was successfully created.' }

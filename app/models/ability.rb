@@ -11,7 +11,6 @@ class Ability
         userC==user
       end
       can :read, :all
-      cannot :index, :all
       can :create, Comment
       can :manage, Comment do |comment|
         comment.user==user

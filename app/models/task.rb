@@ -10,5 +10,11 @@ class Task < ActiveRecord::Base
             on: :create
 
 
-
+  def self.get_complete(commit, tasks)
+    if commit
+      tasks.reject { |task| task.status!='complete' }
+    else
+      tasks
+    end
+  end
 end
