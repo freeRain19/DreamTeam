@@ -7,4 +7,9 @@ class Project < ActiveRecord::Base
             on: :create
   validates :end_date, date: {after: Proc.new {:start_date}, message: 'Must be after Start day'},
             on: :create
+
+  private
+  def self.search_by_name(search_name)
+    projects=Project.where('name like ?', "%#{search_name}%")
+  end
 end

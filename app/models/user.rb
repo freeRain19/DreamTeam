@@ -19,12 +19,9 @@ class User < ActiveRecord::Base
 
   #---------------------------------------------
 
-  def total_tasks
-    write_attribute :total_tasks, 100
-  end
 
   def to_s
-    "email = "+email+"  |  firt_name = "+first_name + "  |  last_name " + last_name + "  |  team  " + team.name
+    "email = "+email+"  |  firt_name = "+first_name + "  |  team  " + team.name
   end
 
   def has_role?(role)

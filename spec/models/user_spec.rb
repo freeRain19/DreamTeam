@@ -1,8 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 
 
 describe User do
-=begin
   it 'Count user tasks' do
     role_admin=Role.create(name: 'admin')
     role_user=Role.create(name: 'user')
@@ -11,13 +10,20 @@ describe User do
     users=Array.new
     users<<user1
     users<<user2
-    users.count.should==2
-
+    expect(users.count).to match(User.all.count)
   end
 
+  it "returns a array of results that match" do
+    dima = FactoryGirl.create(:user, last_name: "Dima")
+    den = FactoryGirl.create(:user, last_name: "Den")
+    andrey = FactoryGirl.create(:user, last_name: "Andrey")
+    expect(User.where("last_name LIKE ?","D%")).to match_array([dima, den])
+  end
+
+=begin
   it 'create & fill tables' do
-    role_admin=Role.create(name: 'admin')
-    role_user=Role.create(name: 'user')
+    role_admin=Role.create!(name: 'admin')
+    role_user=Role.create!(name: 'user')
     4.times {
       #-------create team with 3 users
       team = FactoryGirl.create(:team_with_users, users_count: 3)
@@ -46,5 +52,4 @@ describe User do
     }
   end
 =end
-
 end

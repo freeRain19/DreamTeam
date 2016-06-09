@@ -10,7 +10,9 @@ class Ability
       can [:update, :read], User do |userC|
         userC==user
       end
-      can :read, :all
+      can [:read], Task  #{|userC| userC==user}
+
+      can :index, :all
       can :create, Comment
       can :manage, Comment do |comment|
         comment.user==user

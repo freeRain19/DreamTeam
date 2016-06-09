@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if params[:search_name]
-      @projects=Project.where('name like ?', "%#{params[:search_name]}%")
+      @projects=Project.search_by_name(params[:search_name])
     else
       @projects = Project.all
     end
@@ -14,13 +14,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-  end
-
-  def search
-    if params[:search]
-      puts "_________________________________________"
-    end
-    redirect_to projects_path, :notice => :search
   end
 
   # GET /projects/new

@@ -10,6 +10,7 @@ class TasksController < ApplicationController
       @user=User.find_by_id(params[:user_id])
       @tasks=@user.tasks
       @tasks=Task.get_complete(params[:commit], @tasks)
+      render
     end
     if params[:project_id].present?
       @project = Project.find(params[:project_id])

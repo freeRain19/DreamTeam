@@ -16,7 +16,8 @@ RSpec.describe CommentsController, type: :controller do
     end
     it 'not route path' do
       user_login
-      expect(get: '/comments/2/show').not_to be_routable
+      comment= FactoryGirl.create(:comment)
+      expect(get: '/comments/1/show').not_to be_routable
     end
   end
 end

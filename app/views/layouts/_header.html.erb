@@ -1,22 +1,22 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "RailsP", '#', id: "logo" %>
+      <%= link_to "RailsP", root_path, id: "logo" %>
       <nav>
         <ul class="nav navbar-nav" type="">
-          <li><%= link_to "Home",    root_path %></li>
-          <li><%= link_to "Help",    help_path %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Help", help_path %></li>
         </ul>
       </nav>
     </div>
   </div>
 </header>
 <div align="right">
-<% if user_signed_in? %>
- <%= link_to 'Your Profile', current_user%>
-    <span>Здравствуйте, <%= current_user.email %></span>
-    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-<% else %>
-    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
-<% end %>
+  <% if user_signed_in? %>
+      <%= link_to 'Your Profile', current_user %>
+      <span>Здравствуйте, <%= current_user.email %></span>
+      <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+  <% else %>
+      <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+  <% end %>
 </div>
