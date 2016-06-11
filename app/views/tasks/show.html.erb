@@ -29,6 +29,9 @@
   <strong>Tasks posts</strong>
   <%= link_to pluralize(@task.posts.size, 'post'), task_posts_path(:task_id => @task) %>
 </h5>
+<% if can? :create, Post %>
+    <%= link_to 'Add New Post', new_task_post_path(:task_id => @task) %>
+<% end %>
 <% if can? :update, Task %>
     <%= link_to 'Edit', edit_task_path(@task) %> |
 <% end %>

@@ -9,17 +9,17 @@ require 'factory_girl_rails'
 
 role_admin=Role.create(name: 'admin')
 role_user=Role.create(name: 'user')
-user_admin=User.create(email: 'admin@admin.com',password: 'qweqwe',role_id: 1,first_name: 'denis',last_name: 'T')
-user_admin.save
+create_admin=FactoryGirl.create(:user,email: 'admin@admin.com',password: 'qweqwe',role_id: 1,first_name: 'denis',last_name: 'Tq')
 
-5.times {
 
-  #-------create team with 3 users
+200.times {
+
+  #-------create team with  users
   team = FactoryGirl.create(:team_with_users, users_count: 3)
 
 
-  #-------create project  with 2 tasks
-  project = FactoryGirl.create(:project_with_tasks, tasks_count: 2)
+  #-------create project  with  tasks
+  project = FactoryGirl.create(:project_with_tasks, tasks_count: rand(2)+2)
 
 
   #----------Assign a random team the project
@@ -27,18 +27,19 @@ user_admin.save
   random_team=Team.find(rand(max_team)+1)
   random_team.projects<<project
 
-  #-----Field "task" is filled in 2 from 3 users
+  #-----Field "task" is filled 
 
   project.tasks.each_index do |index|
     random_team.users[index].tasks<<project.tasks[index]
-    post = FactoryGirl.create(:post, :task=> project.tasks[index])
+    @post = FactoryGirl.create(:post, :task=> project.tasks[index])
   end
 
+
   #-------- add posts & generate comments from random user
-  Post.all.each do |post|
+  3.times{
     comment = FactoryGirl.create(:comment)
     max_users = User.all.size
     comment.user=User.all[rand(max_users)]
-    post.comments<<comment
-  end
+    @post.comments<<comment
+  }
 }
